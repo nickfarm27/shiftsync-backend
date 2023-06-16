@@ -10,6 +10,7 @@ app.use(cors());
 
 const token = process.env.WHATSAPP_TOKEN;
 
+app.use("/employees", routes.employees);
 app.use("/roles", routes.roles);
 
 // Accepts GET requests at the /webhook endpoint. You need this URL to setup webhook initially.

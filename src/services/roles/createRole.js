@@ -2,8 +2,6 @@ import supabase from "../../supabaseClient.js";
 
 export const createRole = async (req, res) => {
   const { name } = req.body;
-  console.log(req.body);
-  console.log(name);
 
   const { data, error } = await supabase
     .from("roles")
@@ -12,12 +10,9 @@ export const createRole = async (req, res) => {
     })
     .select("*");
 
-  console.log(data, error);
-
   if (error) {
-    res.status;
-    res.send;
+    res.status(423).send({ error });
   }
 
-  res.send({ data });
+  res.status(201).send({ data });
 };
