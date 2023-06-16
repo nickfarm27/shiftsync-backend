@@ -12,6 +12,7 @@ const token = process.env.WHATSAPP_TOKEN;
 
 app.use("/employees", routes.employees);
 app.use("/roles", routes.roles);
+app.use("/shifts", routes.shifts);
 
 // Accepts GET requests at the /webhook endpoint. You need this URL to setup webhook initially.
 // info on verification request payload: https://developers.facebook.com/docs/graph-api/webhooks/getting-started#verification-requests

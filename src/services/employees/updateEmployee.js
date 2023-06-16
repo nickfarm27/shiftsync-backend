@@ -12,7 +12,7 @@ export const updateEmployee = async (req, res) => {
       hourly_rate: hourlyRate,
     })
     .eq("id", id)
-    .select("*, roles(id, name)");
+    .select("*, roles(*)");
 
   if (error) {
     res.status(423).send({ error });
@@ -52,11 +52,21 @@ export const updateEmployee = async (req, res) => {
   const { data: employeeRolesData, error: employeeRolesError } = await supabase
     .from("employee_role")
     .insert(employeeRoles)
-    .select("*, roles(id, name)");
+    .select("*, roles(*)");
 
   if (employeeRolesError) {
     res.status(423).send({ error: employeeRolesError });
   }
 
-  res.send({ data });
+  // fetch the employee with the roles
+  const { data: employeeData, error: employeeError } = await supabase
+    .from("employees")
+    .select("*, roles(*)")
+    .eq("id", id);
+
+  if (employeeError) {
+    res.status(423).send({ error: employeeError });
+  }
+
+  res.send({ data: employeeData });
 };

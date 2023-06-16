@@ -1,16 +1,12 @@
 import supabase from "../../supabaseClient.js";
 
-export const getEmployee = async (req, res) => {
-  const { id } = req.params;
-
+export const getShifts = async (req, res) => {
   const { data, error } = await supabase
-    .from("employees")
-    .select("*, roles(*)")
-    .eq("id", id);
+    .from("shifts")
+    .select("*, shift_role(*, roles(*))");
 
   if (error) {
     res.status(423).send({ error });
   }
-
   res.send({ data });
 };
