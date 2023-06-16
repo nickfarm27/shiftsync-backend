@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import axios from "axios";
-// import routes from "./routes/index.js";
+import routes from "./routes/index.js";
 
 const app = express();
 app.use(express.json());
@@ -10,11 +10,7 @@ app.use(cors());
 
 const token = process.env.WHATSAPP_TOKEN;
 
-// app.use("/budgets", routes.budgets);
-// app.use("/categories", routes.categories);
-// app.use("/piggy_banks", routes.piggyBanks);
-// app.use("/transactions", routes.transactions);
-// app.use("/wallets", routes.wallets);
+app.use("/roles", routes.roles);
 
 // Accepts GET requests at the /webhook endpoint. You need this URL to setup webhook initially.
 // info on verification request payload: https://developers.facebook.com/docs/graph-api/webhooks/getting-started#verification-requests
@@ -92,9 +88,9 @@ app.post("/webhook/whatsapp", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("welcome to whappo");
+  res.send("welcome to SHIFTSYNC");
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`WHAPPO listening on port ${process.env.PORT}!`);
+  console.log(`SHIFTSYNC listening on port ${process.env.PORT}!`);
 });
