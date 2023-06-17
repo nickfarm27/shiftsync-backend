@@ -149,7 +149,7 @@ export const requestAvailabilities = async (req, res) => {
   // remove commas from allShiftTimesAndNames
   const allShiftTimesAndNamesString = allShiftTimesAndNames.join("");
 
-  const msgBody = `Here are the timings available for ${date} (${capitalizedDayOfWeek}): \n\n${allShiftTimesAndNamesString}\nPlease respond with the shift names that you would prefer in this format.\n\nFor 1 shift only:\nShift Name 1\n\nFor more than one shift:\nShift Name 1,Shift Name 2`;
+  const msgBody = `Here are the timings available for ${date} (${capitalizedDayOfWeek}): \n\n${allShiftTimesAndNamesString}\nPlease respond with the shift names that you would prefer in this format.\n\nFor 1 shift only:\n${date},Shift Name 1\n\nFor more than one shift:\n${date},Shift Name 1,Shift Name 2`;
 
   // send whatsapp messages to each employee unique phone numbers to ask for their availability
   uniqueEmployeePhoneNumbers.forEach((phoneNumber) => {
