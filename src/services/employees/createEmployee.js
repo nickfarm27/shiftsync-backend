@@ -33,11 +33,10 @@ export const createEmployee = async (req, res) => {
     res.status(423).send({ error: employeeRolesError });
   }
 
-  // fetch the employee with the roles
+  // fetch all employees data
   const { data: employeeData, error: employeeError } = await supabase
     .from("employees")
-    .select("*, roles(*)")
-    .eq("id", employeeId);
+    .select("*, roles(*)");
 
   if (employeeError) {
     res.status(423).send({ error: employeeError });
