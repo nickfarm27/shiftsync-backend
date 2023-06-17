@@ -10,6 +10,7 @@ app.use(cors());
 
 const token = process.env.WHATSAPP_TOKEN;
 
+app.use("/availabilities", routes.availabilities);
 app.use("/employees", routes.employees);
 app.use("/roles", routes.roles);
 app.use("/shifts", routes.shifts);
