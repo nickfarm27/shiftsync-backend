@@ -96,6 +96,8 @@ app.post("/webhook/whatsapp", async (req, res) => {
             type: "text",
             text: {
               preview_url: false,
+              // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
+              // this is when the manager accepts the assignment of shifts for everyone
               body: "You have been assigned to Shift Name 1 on 2023/06/24",
             },
           },
@@ -119,6 +121,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
             type: "text",
             text: {
               preview_url: false,
+              // TODO: UPDATE THIS BASED ON THE DATE
               body: "A replacement will be arranged for your shift on 2023/06/24",
             },
           },
@@ -194,6 +197,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
             type: "text",
             text: {
               preview_url: false,
+              // TODO: UPDATE THIS BASED ON THE DATE
               body: "Hi, we have found a replacement for your shift on 2023/06/24 from 10:00 AM - 2:00 PM",
             },
           },
