@@ -17,7 +17,7 @@ app.use("/shifts", routes.shifts);
 
 // Accepts GET requests at the /webhook endpoint. You need this URL to setup webhook initially.
 // info on verification request payload: https://developers.facebook.com/docs/graph-api/webhooks/getting-started#verification-requests
-app.get("/webhook/whatsapp", (req, res) => {
+app.get("/webhook/whatsapp", async (req, res) => {
   /**
    * UPDATE YOUR VERIFY TOKEN
    *This will be the Verify Token value when you set up webhook
@@ -45,14 +45,8 @@ app.get("/webhook/whatsapp", (req, res) => {
 });
 
 // Accepts POST requests at /webhook endpoint
-app.post("/webhook/whatsapp", (req, res) => {
+app.post("/webhook/whatsapp", async (req, res) => {
   // Parse the request body from the POST
-  let body = req.body;
-
-  // Check the Incoming webhook message
-  console.log(JSON.stringify(req.body, null, 2));
-  console.log(body);
-
   // info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
   if (req.body.object) {
     if (
@@ -62,26 +56,153 @@ app.post("/webhook/whatsapp", (req, res) => {
       req.body.entry[0].changes[0].value.messages &&
       req.body.entry[0].changes[0].value.messages[0]
     ) {
-      let phone_number_id =
+      const phoneNumberId =
         req.body.entry[0].changes[0].value.metadata.phone_number_id;
-      let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
-      let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
-      axios({
-        method: "POST", // Required, HTTP method, a string, e.g. POST, GET
-        url:
-          "https://graph.facebook.com/v17.0/" + phone_number_id + "/messages",
-        data: {
-          messaging_product: "whatsapp",
-          recipient_type: "individual",
-          to: from,
-          type: "text",
-          text: { preview_url: false, body: "Ack: " + msg_body },
-        },
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
+      const from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
+      const msgBody = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
+
+      // msgBody will be
+      // date,Shift Name 1,Shift Name 2 or date,Shift Name 1
+      // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
+      if (msgBody === "2023/06/24,Shift Name 1,Shift Name 2") {
+        axios({
+          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            "https://graph.facebook.com/v17.0/" + phoneNumberId + "/messages",
+          data: {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: from,
+            type: "text",
+            text: { preview_url: false, body: "Shift availability recorded!" },
+          },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        // sleep for 5 seconds
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+
+        axios({
+          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            "https://graph.facebook.com/v17.0/" + phoneNumberId + "/messages",
+          data: {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: from,
+            type: "text",
+            text: {
+              preview_url: false,
+              body: "You have been assigned to Shift Name 1 on 2023/06/24",
+            },
+          },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+      }
+
+      if (msgBody === "I would like to cancel my shift on 2023/06/24") {
+        // send message saying that a replacement will be arranged for the shift
+        axios({
+          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            "https://graph.facebook.com/v17.0/" + phoneNumberId + "/messages",
+          data: {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: from,
+            type: "text",
+            text: {
+              preview_url: false,
+              body: "A replacement will be arranged for your shift on 2023/06/24",
+            },
+          },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        // sleep for 5 seconds
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+
+        // send message to employee 2 to ask for their availability
+        axios({
+          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            "https://graph.facebook.com/v17.0/" + phoneNumberId + "/messages",
+          data: {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 2
+            to: "+60103928029",
+            type: "text",
+            text: {
+              preview_url: false,
+              // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
+              body: "Hi Daniel, would you be able to cover the shift on 2023/06/24 from 10:00 AM - 2:00 PM?",
+            },
+          },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+      }
+
+      if (msgBody === "Yes I can replace the shift on 2023/06/24") {
+        // send message saying that a replacement will be arranged for the shift
+        axios({
+          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            "https://graph.facebook.com/v17.0/" + phoneNumberId + "/messages",
+          data: {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: from,
+            type: "text",
+            text: {
+              preview_url: false,
+              // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
+              body: "Great! You have been assigned to the shift on 2023/06/24 from 10:00 AM - 2:00 PM",
+            },
+          },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        // sleep for 5 seconds
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+
+        // send message to employee 1 to inform them that a replacement has been found
+        axios({
+          method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            "https://graph.facebook.com/v17.0/" + phoneNumberId + "/messages",
+          data: {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 1
+            to: "+60194549277",
+            type: "text",
+            text: {
+              preview_url: false,
+              body: "Hi, we have found a replacement for your shift on 2023/06/24 from 10:00 AM - 2:00 PM",
+            },
+          },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+      }
     }
     res.sendStatus(200);
   } else {
