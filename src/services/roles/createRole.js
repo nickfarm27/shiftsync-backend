@@ -12,7 +12,18 @@ export const createRole = async (req, res) => {
 
   if (error) {
     res.status(423).send({ error });
+    return; // Return early to avoid further execution
   }
 
-  res.status(201).send({ data });
+  // Fetch the updated list of data from the "roles" table
+  const { data: allData, error: fetchError } = await supabase
+    .from("roles")
+    .select("*");
+
+  if (fetchError) {
+    res.status(500).send({ error: fetchError });
+    return; // Return early to avoid further execution
+  }
+
+  res.status(201).send({ data: allData });
 };

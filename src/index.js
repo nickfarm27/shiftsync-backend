@@ -64,7 +64,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
       // msgBody will be
       // date,Shift Name 1,Shift Name 2 or date,Shift Name 1
       // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
-      if (msgBody === "2023/06/24,Shift Name 1,Shift Name 2") {
+      if (msgBody === "2023/06/18, Morning Shift") {
         axios({
           method: "POST", // Required, HTTP method, a string, e.g. POST, GET
           url:
@@ -98,7 +98,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
               preview_url: false,
               // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
               // this is when the manager accepts the assignment of shifts for everyone
-              body: "You have been assigned to Shift Name 1 on 2023/06/24",
+              body: "You have been assigned to Morning Shift on 2023/06/18",
             },
           },
           headers: {
@@ -108,7 +108,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
         });
       }
 
-      if (msgBody === "I would like to cancel my shift on 2023/06/24") {
+      if (msgBody === "I would like to cancel my shift on 2023/06/18") {
         // send message saying that a replacement will be arranged for the shift
         axios({
           method: "POST", // Required, HTTP method, a string, e.g. POST, GET
@@ -122,7 +122,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
             text: {
               preview_url: false,
               // TODO: UPDATE THIS BASED ON THE DATE
-              body: "A replacement will be arranged for your shift on 2023/06/24",
+              body: "A replacement will be arranged for your shift on 2023/06/18",
             },
           },
           headers: {
@@ -143,12 +143,12 @@ app.post("/webhook/whatsapp", async (req, res) => {
             messaging_product: "whatsapp",
             recipient_type: "individual",
             // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 2
-            to: "+60103928029",
+            to: "+60167668686",
             type: "text",
             text: {
               preview_url: false,
               // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
-              body: "Hi Daniel, would you be able to cover the shift on 2023/06/24 from 10:00 AM - 2:00 PM?",
+              body: "Hi Mike, would you be able to cover the shift on 2023/06/18 from 10:00 AM - 2:00 PM?",
             },
           },
           headers: {
@@ -158,7 +158,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
         });
       }
 
-      if (msgBody === "Yes I can replace the shift on 2023/06/24") {
+      if (msgBody === "Yes I can replace the shift on 2023/06/18") {
         // send message saying that a replacement will be arranged for the shift
         axios({
           method: "POST", // Required, HTTP method, a string, e.g. POST, GET
@@ -172,7 +172,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
             text: {
               preview_url: false,
               // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
-              body: "Great! You have been assigned to the shift on 2023/06/24 from 10:00 AM - 2:00 PM",
+              body: "Great! You have been assigned to the shift on 2023/06/18 from 10:00 AM - 2:00 PM",
             },
           },
           headers: {
@@ -193,7 +193,7 @@ app.post("/webhook/whatsapp", async (req, res) => {
             messaging_product: "whatsapp",
             recipient_type: "individual",
             // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 1
-            to: "+60194549277",
+            to: "+60175015966",
             type: "text",
             text: {
               preview_url: false,
