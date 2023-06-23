@@ -122,10 +122,156 @@ app.post('/webhook/whatsapp', async (req, res) => {
       const from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
       const msgBody = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
 
-      // msgBody will be
-      // date,Shift Name 1,Shift Name 2 or date,Shift Name 1
-      // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
-      if (msgBody === '2023/06/18, Morning Shift') {
+      // // msgBody will be
+      // // date,Shift Name 1,Shift Name 2 or date,Shift Name 1
+      // // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
+      // if (msgBody === '2023/06/18, Morning Shift') {
+      //   axios({
+      //     method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+      //     url:
+      //       'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+      //     data: {
+      //       messaging_product: 'whatsapp',
+      //       recipient_type: 'individual',
+      //       to: from,
+      //       type: 'text',
+      //       text: { preview_url: false, body: 'Shift availability recorded!' },
+      //     },
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: 'Bearer ' + token,
+      //     },
+      //   });
+
+      //   // sleep for 5 seconds
+      //   await new Promise((resolve) => setTimeout(resolve, 5000));
+
+      //   axios({
+      //     method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+      //     url:
+      //       'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+      //     data: {
+      //       messaging_product: 'whatsapp',
+      //       recipient_type: 'individual',
+      //       to: from,
+      //       type: 'text',
+      //       text: {
+      //         preview_url: false,
+      //         // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
+      //         // this is when the manager accepts the assignment of shifts for everyone
+      //         body: 'You have been assigned to Morning Shift on 2023/06/18',
+      //       },
+      //     },
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: 'Bearer ' + token,
+      //     },
+      //   });
+      // }
+
+      // if (msgBody === 'I would like to cancel my shift on 2023/06/18') {
+      //   // send message saying that a replacement will be arranged for the shift
+      //   axios({
+      //     method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+      //     url:
+      //       'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+      //     data: {
+      //       messaging_product: 'whatsapp',
+      //       recipient_type: 'individual',
+      //       to: from,
+      //       type: 'text',
+      //       text: {
+      //         preview_url: false,
+      //         // TODO: UPDATE THIS BASED ON THE DATE
+      //         body: 'A replacement will be arranged for your shift on 2023/06/18',
+      //       },
+      //     },
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: 'Bearer ' + token,
+      //     },
+      //   });
+
+      //   // sleep for 5 seconds
+      //   await new Promise((resolve) => setTimeout(resolve, 5000));
+
+      //   // send message to employee 2 to ask for their availability
+      //   axios({
+      //     method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+      //     url:
+      //       'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+      //     data: {
+      //       messaging_product: 'whatsapp',
+      //       recipient_type: 'individual',
+      //       // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 2
+      //       to: '+60167668686',
+      //       type: 'text',
+      //       text: {
+      //         preview_url: false,
+      //         // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
+      //         body: 'Hi Mike, would you be able to cover the shift on 2023/06/18 from 10:00 AM - 2:00 PM?',
+      //       },
+      //     },
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: 'Bearer ' + token,
+      //     },
+      //   });
+      // }
+
+      // if (msgBody === 'Yes I can replace the shift on 2023/06/18') {
+      //   // send message saying that a replacement will be arranged for the shift
+      //   axios({
+      //     method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+      //     url:
+      //       'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+      //     data: {
+      //       messaging_product: 'whatsapp',
+      //       recipient_type: 'individual',
+      //       to: from,
+      //       type: 'text',
+      //       text: {
+      //         preview_url: false,
+      //         // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
+      //         body: 'Great! You have been assigned to the shift on 2023/06/18 from 10:00 AM - 2:00 PM',
+      //       },
+      //     },
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: 'Bearer ' + token,
+      //     },
+      //   });
+
+      //   // sleep for 5 seconds
+      //   await new Promise((resolve) => setTimeout(resolve, 5000));
+
+      //   // send message to employee 1 to inform them that a replacement has been found
+      //   axios({
+      //     method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+      //     url:
+      //       'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+      //     data: {
+      //       messaging_product: 'whatsapp',
+      //       recipient_type: 'individual',
+      //       // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 1
+      //       to: '+60175015966',
+      //       type: 'text',
+      //       text: {
+      //         preview_url: false,
+      //         // TODO: UPDATE THIS BASED ON THE DATE
+      //         body: 'Hi, we have found a replacement for your shift on 2023/06/24 from 10:00 AM - 2:00 PM',
+      //       },
+      //     },
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: 'Bearer ' + token,
+      //     },
+      //   });
+      // }
+
+      // ? =============================== flow chart for availability request ===============================
+
+      if (msgBody.toLowerCase() === "morning pls") {
         axios({
           method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
           url:
@@ -133,33 +279,12 @@ app.post('/webhook/whatsapp', async (req, res) => {
           data: {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
-            to: from,
-            type: 'text',
-            text: { preview_url: false, body: 'Shift availability recorded!' },
-          },
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
-          },
-        });
-
-        // sleep for 5 seconds
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-
-        axios({
-          method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
-          url:
-            'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
-          data: {
-            messaging_product: 'whatsapp',
-            recipient_type: 'individual',
-            to: from,
+            // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
+            to: "+60194549277",
             type: 'text',
             text: {
               preview_url: false,
-              // TODO: UPDATE THIS BASED ON THE RESPONSE YOU PLAN TO RECEIVE
-              // this is when the manager accepts the assignment of shifts for everyone
-              body: 'You have been assigned to Morning Shift on 2023/06/18',
+              body: 'You have stated your availability is on \n- Morning, 8:00 am - 6:00 pm, "Waiter"\n\nWould you like to confirm?',
             },
           },
           headers: {
@@ -169,8 +294,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
         });
       }
 
-      if (msgBody === 'I would like to cancel my shift on 2023/06/18') {
-        // send message saying that a replacement will be arranged for the shift
+      if (msgBody.toLowerCase() === "yes") {
         axios({
           method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
           url:
@@ -178,12 +302,12 @@ app.post('/webhook/whatsapp', async (req, res) => {
           data: {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
-            to: from,
+            // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
+            to: "+60194549277",
             type: 'text',
             text: {
               preview_url: false,
-              // TODO: UPDATE THIS BASED ON THE DATE
-              body: 'A replacement will be arranged for your shift on 2023/06/18',
+              body: 'Shift availability recorded!',
             },
           },
           headers: {
@@ -192,10 +316,9 @@ app.post('/webhook/whatsapp', async (req, res) => {
           },
         });
 
-        // sleep for 5 seconds
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+        // sleep for 3 seconds
+        await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        // send message to employee 2 to ask for their availability
         axios({
           method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
           url:
@@ -203,13 +326,59 @@ app.post('/webhook/whatsapp', async (req, res) => {
           data: {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
-            // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 2
-            to: '+60167668686',
+            // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
+            to: "+60194549277",
             type: 'text',
             text: {
               preview_url: false,
-              // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
-              body: 'Hi Mike, would you be able to cover the shift on 2023/06/18 from 10:00 AM - 2:00 PM?',
+              body: 'You have been assigned to the morning shift, 8:00 am - 6:00 pm on 25/06/2023, as "Waiter"',
+            },
+          },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+        });
+      }
+      // ? =============================== flow chart for availability request end ===============================
+
+      // ? =============================== flow chart for shift cancellation =====================================
+
+      if (msgBody.toLowerCase() === "i would like to cancel my morning shift on 25th of june") {
+        axios({
+          method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+          data: {
+            messaging_product: 'whatsapp',
+            recipient_type: 'individual',
+            // TODO: UPDATE THIS TO KAI'S PHONE NUMBER
+            to: "+60194549277",
+            type: 'text',
+            text: {
+              preview_url: false,
+              body: 'A replacement will be arranged for your shift on 25/06/2023',
+            },
+          },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+        });
+        
+        axios({
+          method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
+          url:
+            'https://graph.facebook.com/v17.0/' + phoneNumberId + '/messages',
+          data: {
+            messaging_product: 'whatsapp',
+            recipient_type: 'individual',
+            // TODO: UPDATE THIS TO MIKE'S PHONE NUMBER
+            to: "+60194549277",
+            type: 'text',
+            text: {
+              preview_url: false,
+              body: 'Hi Mike, would you be able to cover the shift on 25/06/2023 from 10:00 am - 2:00 pm?',
             },
           },
           headers: {
@@ -219,8 +388,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
         });
       }
 
-      if (msgBody === 'Yes I can replace the shift on 2023/06/18') {
-        // send message saying that a replacement will be arranged for the shift
+      if (msgBody.toLowerCase() === "yes im ok") {
         axios({
           method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
           url:
@@ -228,12 +396,12 @@ app.post('/webhook/whatsapp', async (req, res) => {
           data: {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
-            to: from,
+            // TODO: UPDATE THIS TO MIKE'S PHONE NUMBER
+            to: "+60194549277",
             type: 'text',
             text: {
               preview_url: false,
-              // TODO: UPDATE THIS BASED ON THE DATE AND TIME OF SHIFT
-              body: 'Great! You have been assigned to the shift on 2023/06/18 from 10:00 AM - 2:00 PM',
+              body: 'Great! You have been assigned to the shift on 25/06/2023 from 10:00 am - 2:00 pm',
             },
           },
           headers: {
@@ -241,11 +409,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             Authorization: 'Bearer ' + token,
           },
         });
-
-        // sleep for 5 seconds
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-
-        // send message to employee 1 to inform them that a replacement has been found
+        
         axios({
           method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
           url:
@@ -253,13 +417,12 @@ app.post('/webhook/whatsapp', async (req, res) => {
           data: {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
-            // TODO: UPDATE THIS BASED ON THE PHONE NUMBER OF EMPLOYEE 1
-            to: '+60175015966',
+            // TODO: UPDATE THIS TO KAI'S PHONE NUMBER
+            to: "+60194549277",
             type: 'text',
             text: {
               preview_url: false,
-              // TODO: UPDATE THIS BASED ON THE DATE
-              body: 'Hi, we have found a replacement for your shift on 2023/06/24 from 10:00 AM - 2:00 PM',
+              body: 'Hi, we have found a replacement for your shift',
             },
           },
           headers: {
@@ -268,6 +431,8 @@ app.post('/webhook/whatsapp', async (req, res) => {
           },
         });
       }
+
+      // ? =============================== flow chart for shift cancellation end =====================================
     }
     res.sendStatus(200);
   } else {
@@ -316,6 +481,29 @@ app.post('/calendar/insert', async (req, res) => {
     console.log(error);
     res.sendStatus(500);
   }
+});
+
+app.post('/requestAvailabilities', async (req, res) => {
+  const msgBody = `Here are the available shifts for 25/06/2023 \n\n- Morning, 8:00 am - 6:00 pm, "Waiter"\n- Afternoon, 12:00 pm - 10:00 pm, "Cashier"\n- Full Shift, 8:00 am - 10:00 pm, "Waiter"`
+
+  axios({
+    method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+    url: `https://graph.facebook.com/v17.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`,
+    data: {
+      messaging_product: "whatsapp",
+      recipient_type: "individual",
+      // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
+      to: "+60194549277",
+      type: "text",
+      text: { preview_url: false, body: msgBody },
+    },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + process.env.WHATSAPP_TOKEN,
+    },
+  });
+
+  res.status(200).send({ data: { success: true } });
 });
 
 app.get('/', (req, res) => {
