@@ -344,7 +344,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
 
       // ? =============================== flow chart for shift cancellation =====================================
 
-      if (msgBody.toLowerCase() === "i would like to cancel my morning shift on 25th of june") {
+      if (msgBody.toLowerCase() === "i would like to cancel my afternoon shift on 25th of june") {
         axios({
           method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
           url:
@@ -378,7 +378,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             type: 'text',
             text: {
               preview_url: false,
-              body: 'Hi Mike, would you be able to cover the shift on 25/06/2023 from 10:00 am - 2:00 pm?',
+              body: 'Hi Mike, would you be able to cover the shift on 25/06/2023 from 12:00 pm - 10:00 pm?',
             },
           },
           headers: {
@@ -401,7 +401,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             type: 'text',
             text: {
               preview_url: false,
-              body: 'Great! You have been assigned to the shift on 25/06/2023 from 10:00 am - 2:00 pm',
+              body: 'Great! You have been assigned to the shift on 25/06/2023 from 12:00 pm - 10:00 pm',
             },
           },
           headers: {
