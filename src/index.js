@@ -493,7 +493,7 @@ app.post('/requestAvailabilities', async (req, res) => {
       messaging_product: "whatsapp",
       recipient_type: "individual",
       // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
-      to: "+60194549277",
+      to: "+60175015966",
       type: "text",
       text: { preview_url: false, body: msgBody },
     },
