@@ -280,7 +280,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
             // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
-            to: "+60194549277",
+            to: "+60175015966",
             type: 'text',
             text: {
               preview_url: false,
@@ -303,7 +303,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
             // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
-            to: "+60194549277",
+            to: "+60175015966",
             type: 'text',
             text: {
               preview_url: false,
@@ -327,7 +327,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
             // TODO: UPDATE THIS TO ZHENG JIE'S PHONE NUMBER
-            to: "+60194549277",
+            to: "+60175015966",
             type: 'text',
             text: {
               preview_url: false,
@@ -353,7 +353,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
             // TODO: UPDATE THIS TO KAI'S PHONE NUMBER
-            to: "+60194549277",
+            to: "+60168892811",
             type: 'text',
             text: {
               preview_url: false,
@@ -374,7 +374,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
             // TODO: UPDATE THIS TO MIKE'S PHONE NUMBER
-            to: "+60194549277",
+            to: "+60167668686",
             type: 'text',
             text: {
               preview_url: false,
@@ -397,7 +397,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
             // TODO: UPDATE THIS TO MIKE'S PHONE NUMBER
-            to: "+60194549277",
+            to: "+60167668686",
             type: 'text',
             text: {
               preview_url: false,
@@ -418,7 +418,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
             // TODO: UPDATE THIS TO KAI'S PHONE NUMBER
-            to: "+60194549277",
+            to: "+60168892811",
             type: 'text',
             text: {
               preview_url: false,
